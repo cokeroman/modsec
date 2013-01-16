@@ -84,12 +84,14 @@ foreach ($sites as $s) {
                     <tr>
                         <th width='20%'>Time</th>
                         <th>Site</th>
+                        <th>IP</th>
                         <th>URL</th>
                     </tr>
 <?php
 foreach ($getattacksdetail as $attacks) {
 		$fecha = substr($attacks['file_id'], 0,15);
 		$host = str_replace("Host:","",$attacks['host']);
+		$xff = preg_replace("/^X-Forwarded-For: /","",$attacks['xff']);
 		if (strlen($attacks['get']) <= 80) {
 			$get = $attacks['get'];
 		} else {
@@ -100,6 +102,7 @@ foreach ($getattacksdetail as $attacks) {
                 echo " <tr class='clickAttack' onmouseover=\"this.style.fontWeight='bold'\" onmouseout=\"this.style.fontWeight='normal'\">";
                 echo " <td><a href='/stats/show/$attacks[id]'>$fecha</a></td>";
                 echo " <td>$host</td>";
+                echo " <td>$xff</td>";
                 echo " <td class='tooltip' file_id='$attacks[file_id]' timestamp='$attacks[timestamp]' host='$attacks[host]' get='$attacks[get]' dateh='$attacks[date]' cookie='$cookie' referer='$attacks[referer]' ua='$attacks[ua]' ae='$attacks[ae]' xff='$attacks[xff]' message='$message'>$get</td>";
                 echo " </tr>";
 
