@@ -77,11 +77,15 @@ Class Common extends CI_Model
 
 	}
 
-        function reportips()
+        function reportips($site)
         {
                 $this->load->database();
 
-                $sql = "select count(id) as ataques, xff from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) group by xff order by ataques desc limit 0,10;";
+		if ($site == 'all') {
+                	$sql = "select count(id) as ataques, xff from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) group by xff order by ataques desc limit 0,10;";
+		} else {
+                	$sql = "select count(id) as ataques, xff from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) AND host like '%$site%' group by xff order by ataques desc limit 0,10;";
+		}
 
                 if ($query = $this->db->query($sql)) {
                         return $query->result_array();
@@ -90,12 +94,15 @@ Class Common extends CI_Model
                 }
         }
 
-        function reporturls()
+        function reporturls($site)
         {
                 $this->load->database();
-
-                $sql = "select count(id) as ataques, host ,get from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) group by get order by ataques desc limit 0,10;";
-
+		
+		if ($site == 'all') {
+                	$sql = "select count(id) as ataques, host ,get from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) group by get order by ataques desc limit 0,10;";
+		} else {
+                	$sql = "select count(id) as ataques, host ,get from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) AND host like '%$site%' group by get order by ataques desc limit 0,10;";
+		}
                 if ($query = $this->db->query($sql)) {
                         return $query->result_array();
                 } else {
