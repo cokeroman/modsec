@@ -82,9 +82,8 @@ foreach ($sites as $s) {
 
                 <table class='table-style01'>
                     <tr>
-                        <th width='15%'>Time</th>
-                        <th width='15%'>Site</th>
-                        <th width='15%'>IP</th>
+                        <th width='20%'>Time</th>
+                        <th >Site</th>
                         <th>URL</th>
                     </tr>
 <?php
@@ -102,7 +101,7 @@ foreach ($getattacksdetail as $attacks) {
                 echo " <tr class='clickAttack' onmouseover=\"this.style.fontWeight='bold'\" onmouseout=\"this.style.fontWeight='normal'\">";
                 echo " <td><a href='/stats/show/$attacks[id]'>$fecha</a></td>";
                 echo " <td>$host</td>";
-                echo " <td>$xff</td>";
+//                echo " <td>$xff</td>";
                 echo " <td class='tooltip' file_id='$attacks[file_id]' timestamp='$attacks[timestamp]' host='$attacks[host]' get='$attacks[get]' dateh='$attacks[date]' cookie='$cookie' referer='$attacks[referer]' ua='$attacks[ua]' ae='$attacks[ae]' xff='$attacks[xff]' message='$message'>$get</td>";
                 echo " </tr>";
 
