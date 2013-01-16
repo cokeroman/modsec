@@ -56,7 +56,7 @@ class Stats extends CI_Controller {
 		$this->load->view('graph', $data);
 	}
 	
-	public function table($tstimefrom, $tstimeto, $site)
+	public function table($tstimefrom, $tstimeto, $site,$uri)
 	{
 		
 		$data = array();
@@ -69,6 +69,7 @@ class Stats extends CI_Controller {
 			$timefrom = $this->input->post('timefrom');
 			$timeto = $this->input->post('timeto');
 			$site = $this->input->post('site');
+			$uri = $this->input->post('uri');
 
 			$tstimefrom = strtotime($timefrom);
 			$tstimeto = strtotime($timeto);
@@ -79,8 +80,9 @@ class Stats extends CI_Controller {
 			$this->nativesession->set('timefrom', "$timefrom");
 			$this->nativesession->set('timeto', "$timeto");
 			$this->nativesession->set('site', "$site");
+//			$this->nativesession->set('uri', "$uri");
 
-			header ("Location: /stats/table/$tstimefrom/$tstimeto/$site");
+			header ("Location: /stats/table/$tstimefrom/$tstimeto/$site/$uri");
 		} else {
 
 			// si no esta definido los parametros calculamos los datos de los ultimos 10 min
@@ -106,8 +108,9 @@ class Stats extends CI_Controller {
 				$site = 'telecinco';
 				$this->nativesession->set('site', "$site");
 			}
-		
-			$data['getattacksdetail'] = $this->common->getattacksdetail($tstimefrom, $tstimeto, $site, $data['sites']);
+
+				
+			$data['getattacksdetail'] = $this->common->getattacksdetail($tstimefrom, $tstimeto, $site, $data['sites'], $uri);
 
 			$this->load->view('header');
 			$this->load->view('menu');

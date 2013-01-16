@@ -49,13 +49,15 @@
 
 $timefrom = $_SESSION['timefrom'];
 $timeto = $_SESSION['timeto'];
+//$uri = $_SESSION['uri'];
 ?>
 
 <form method='POST' action="<?php echo "http://" . $_SERVER['SERVER_NAME'] . "/stats/table";?>">
 	<table width='100%' align='center'>
 		<tr>
-			<td>Time From: <input type='text' name='timefrom' id='timefrom' value='<?php echo $timefrom; ?>' maxlength="25" size="25"></td>
-			<td>Time To: <input type='text' name='timeto' id='timeto' value='<?php echo $timeto; ?>' maxlength="25" size="25"></td>
+			<td>Time From: <input type='text' name='timefrom' id='timefrom' value='<?php echo $timefrom; ?>' maxlength="25" size="20"></td>
+			<td>Time To: <input type='text' name='timeto' id='timeto' value='<?php echo $timeto; ?>' maxlength="25" size="20"></td>
+			<td>URI: <input type='text' name='uri' id='uri' value='' maxlength="255" size="15"></td>
 			<td>Site: 
 				<select name='site' id='site'>
 <?php

@@ -170,15 +170,16 @@ Class Common extends CI_Model
 	}
 
 
-	function getattacksdetail($timefrom, $timeto, $site, $sites) {
+	function getattacksdetail($timefrom, $timeto, $site, $sites, $uri) {
 		$this->load->database();
                 $timefrom = $this->db->escape_str($timefrom);
                 $timeto = $this->db->escape_str($timeto);
                 $site = $this->db->escape_str($site);
+                $uri = $this->db->escape_str($uri);
 	
 		
 		if ($site != 'otros') {
-			$sql = "SELECT *  FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto' AND host LIKE '%$site%' ORDER BY timestamp DESC";
+			$sql = "SELECT *  FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto' AND host LIKE '%$site%' AND get LIKE '%$uri%' ORDER BY timestamp DESC";
 		} else{
 			$sql = "SELECT * FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto' AND";
 			// Si el ultimo elemento del array es otros lo sacamos del array
