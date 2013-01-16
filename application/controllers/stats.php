@@ -104,10 +104,6 @@ class Stats extends CI_Controller {
 				$timeto = date('Y/m/d H:i', $tstimeto);
 				$this->nativesession->set('timeto',$timeto);
 			}
-			if (! isset($site)) {
-				$site = 'telecinco';
-				$this->nativesession->set('site', "$site");
-			}
 
 				
 			$data['getattacksdetail'] = $this->common->getattacksdetail($tstimefrom, $tstimeto, $site, $data['sites'], $uri);
