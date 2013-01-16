@@ -87,7 +87,11 @@ foreach ($sites as $s) {
 foreach ($getattacksdetail as $attacks) {
 		$fecha = substr($attacks['file_id'], 0,15);
 		$host = str_replace("Host:","",$attacks['host']);
-		$get = substr($attacks['get'], 0,80) . "...";
+		if (strlen($attacks['get']) <= 80) {
+			$get = $attacks['get'];
+		} else {
+			$get = substr($attacks['get'], 0,80) . "...";
+		}
 		$message = preg_replace("/\'/", "",$attacks['message']);
 		$cookie = preg_replace("/\'/", "",$attacks['cookie']);
                 echo " <tr class='clickAttack' onmouseover=\"this.style.fontWeight='bold'\" onmouseout=\"this.style.fontWeight='normal'\">";
