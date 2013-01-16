@@ -82,9 +82,9 @@ foreach ($sites as $s) {
 
                 <table class='table-style01'>
                     <tr>
-                        <th width='15%'>Time</th>
-                        <th width='15%'>Site</th>
-                        <th width='15%'>IP</th>
+                        <th width='20%'>Time</th>
+                        <th>Site</th>
+                        <th>IP</th>
                         <th>URL</th>
                     </tr>
 <?php
@@ -92,10 +92,10 @@ foreach ($getattacksdetail as $attacks) {
 		$fecha = substr($attacks['file_id'], 0,15);
 		$host = str_replace("Host:","",$attacks['host']);
 		$xff = preg_replace("/^X-Forwarded-For: /","",$attacks['xff']);
-		if (strlen($attacks['get']) <= 50) {
+		if (strlen($attacks['get']) <= 80) {
 			$get = $attacks['get'];
 		} else {
-			$get = substr($attacks['get'], 0,50) . "...";
+			$get = substr($attacks['get'], 0,80) . "...";
 		}
 		$message = preg_replace("/\'/", "",$attacks['message']);
 		$cookie = preg_replace("/\'/", "",$attacks['cookie']);
