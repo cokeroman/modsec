@@ -31,7 +31,7 @@ foreach ($urls as $line) {
 
 </table>
 
-<h3>Top 10 ataques por url 24h</h3>
+<h3>Top 10 ataques por ip 24h</h3>
 
 <table class='table-style01'>
 <tr>
