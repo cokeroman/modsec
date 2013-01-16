@@ -2,9 +2,16 @@
 <head>
 </head>
 
+<h3>Ataques totales 24h</h3>
+<table class='table-style01'>
+<tr class='clickAttack' onmouseover=\"this.style.fontWeight='bold'\" onmouseout=\"this.style.fontWeight='normal'\">
+     <td align='left'>Ataques</td>
+     <td align='left'><?php echo $total; ?></td>
+</tr>
+</table>
 
-<h3>Top 10 ataques por url<h3>
-<table width='100%' border='1'>
+<h3>Top 10 ataques por url 24h</h3>
+<table class='table-style01'>
 <tr>
      <th align='left'>Ataques</th>
      <th align='left'>Site</th>
@@ -24,9 +31,9 @@ foreach ($urls as $line) {
 
 </table>
 
-<h3>Top 10 ataques por url<h3>
+<h3>Top 10 ataques por url 24h</h3>
 
-<table width='100%' border='1'>
+<table class='table-style01'>
 <tr>
      <th align='left' >Ataques</th>
      <th align='left'>IP</th>
@@ -42,6 +49,4 @@ foreach ($ips as $line) {
 ?>
 
 </table>
-
-
 </html>

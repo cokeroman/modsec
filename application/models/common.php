@@ -58,6 +58,25 @@ Class Common extends CI_Model
         }
 
 
+	function ataquestotales($site) {
+                $this->load->database();
+                $site = $this->db->escape_str($site);
+
+		if ($site == 'all') {
+			$sql = "select id from log WHERE FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR)";
+		} else {
+			$sql = "select id from log WHERE FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 24 HOUR) AND host like '%$site%'";
+		}
+
+                if ($query = $this->db->query($sql)) {
+                        return $query->num_rows();
+
+                } else {
+                        return FALSE;
+                }
+
+	}
+
         function reportips()
         {
                 $this->load->database();

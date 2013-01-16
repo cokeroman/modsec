@@ -45,7 +45,6 @@
 </head>
 
 <?php
-#var_dump($_SESSION);
 
 
 $timefrom = $_SESSION['timefrom'];

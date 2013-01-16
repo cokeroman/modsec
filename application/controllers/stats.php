@@ -11,15 +11,24 @@ class Stats extends CI_Controller {
 	}
 
 
-	public function reports() {
+	public function reports($site) {
+
+		if (! isset($site)) {
+			$site = 'all';
+		}
+
 		$data = array();
 		$this->load->model('common');
 
-		$data['urls'] = $this->common->reporturls();			
-		$data['ips'] = $this->common->reportips();			
+		$data['total'] = $this->common->ataquestotales($site);
+		$data['urls'] = $this->common->reporturls($site);			
+		$data['ips'] = $this->common->reportips($site);			
 
 
+                $this->load->view('header');
+                $this->load->view('menu');
 		$this->load->view('report', $data);
+                $this->load->view('footer');
 	}
 
 	public function updategraph($site)
