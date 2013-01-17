@@ -179,7 +179,8 @@ class Stats extends CI_Controller {
 	{
 		$data = array();
 		$this->load->model('common');
-		$data['whois'] = $this->common->whois($ip);
+		//$data['whois'] = $this->common->whois($ip);
+		$data['ip'] = $ip;
 	
                 $this->load->view('header');
                 $this->load->view('menu');
