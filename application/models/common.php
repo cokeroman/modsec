@@ -177,16 +177,30 @@ Class Common extends CI_Model
 	}
 
 
-	function getattacksdetail($timefrom, $timeto, $site, $sites, $uri) {
+	function getattacksdetail($timefrom, $timeto, $site, $sites, $uri, $xff) {
 		$this->load->database();
                 $timefrom = $this->db->escape_str($timefrom);
                 $timeto = $this->db->escape_str($timeto);
                 $site = $this->db->escape_str($site);
                 $uri = $this->db->escape_str($uri);
+                $xff = $this->db->escape_str($xff);
 	
 		
 		if ($site != 'otros') {
-			$sql = "SELECT *  FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto' AND host LIKE '%$site%' AND get LIKE '%$uri%' ORDER BY timestamp DESC";
+			$sql = "SELECT *  FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto'";
+                        if ($site) {
+                                $sql .= " AND host LIKE '%$site%'";
+                        }
+			if ($uri) {
+				$sql .= " AND get LIKE '%$uri%'";
+			}
+			if ($xff) {
+				$sql .= " AND xff like '%$xff%'";
+			}
+			$sql .= " ORDER BY timestamp DESC";
+
+
+
 		} else{
 			$sql = "SELECT * FROM log WHERE timestamp >= '$timefrom' and timestamp <= '$timeto' AND";
 			// Si el ultimo elemento del array es otros lo sacamos del array
@@ -197,13 +211,20 @@ Class Common extends CI_Model
                                 if ($s == 'otros') {
 					continue;
 				}
+
 				// Si es el ultmimo elemento del array le quitamos el AND.
 				if (end($sites) == "$s") {
 					$sql .= " host not like '%$s%'";
 				} else {
-					$sql .= " host not like '%$s%' AND";
+					$sql .= "  host not like '%$s%' AND";
 				}
 			}
+                        if ($uri) {
+                               	$sql .= " AND get LIKE '%$uri%'";
+                       	}
+                       	if ($xff) {
+                               	$sql .= " AND xff like '%$xff%'";
+                       	}				
 			$sql .= " ORDER BY timestamp DESC";
 		}
 
@@ -216,20 +237,64 @@ Class Common extends CI_Model
 
 	}
 
-        function getattackspertime($tstimefrom, $tstimeto)
+        function getattackspertime($tstimefrom, $tstimeto, $site, $sites, $uri, $xff)
         {
                 $this->load->database();
                 $tstimefrom = $this->db->escape_str($tstimefrom); // Numero de segundos que queremos consultar hacia atras
                 $tstimeto = $this->db->escape_str($tstimeto);
+                $site = $this->db->escape_str($site);
+                $uri = $this->db->escape_str($uri);
+                $xff = $this->db->escape_str($xff);
 
 
+		if ($site != 'otros') {
+	                $sql = "SELECT
+        	                COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto
+               	         	FROM log      
+                	        WHERE timestamp >= $tstimefrom AND timestamp <= $tstimeto"; 
+                        	if ($site) {
+                                	$sql .= " AND host LIKE '%$site%'";
+                        	}
+                        	if ($uri) {
+                                	$sql .= " AND get LIKE '%$uri%'";
+                       		}
+                        	if ($xff) {
+                                	$sql .= " AND xff like '%$xff%'";
+                        	}				
 
-                $sql = "SELECT
-                        COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto
-                        FROM log      
-                        WHERE timestamp >= $tstimefrom AND timestamp <= $tstimeto 
-                        GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') 
-                        ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
+                       		$sql .= " GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i')"; 
+                       		$sql .= " ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
+		} else {
+                	$sql = "SELECT
+                        	COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto
+                        	FROM log      
+                        	WHERE timestamp >= $tstimefrom AND timestamp <= $tstimeto AND"; 
+
+                        if (end($sites) == 'otros') {
+                                array_pop($sites);
+                        }
+                        foreach ($sites as $s) {
+                                if ($s == 'otros') {
+                                        continue;
+                                }
+
+                                // Si es el ultmimo elemento del array le quitamos el AND.
+                                if (end($sites) == "$s") {
+                                        $sql .= " host not like '%$s%'";
+                                } else {
+                                        $sql .= "  host not like '%$s%' AND";
+                                }
+                        }
+                        if ($uri) {
+                                $sql .= " AND get LIKE '%$uri%'";
+                        }
+                        if ($xff) {
+                                $sql .= " AND xff like '%$xff%'";
+                        }
+				
+                        $sql .= " GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i')"; 
+                        $sql .= " ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
+		}
 
 
                 if ($query = $this->db->query($sql)) {

@@ -13,7 +13,7 @@ $(function () {
             chart: {
                 renderTo: 'container-graph',
                 type: 'spline',
-                height: 300,
+                height: 200,
                 marginRight: 130,
                 marginBottom: 25
             },
@@ -136,7 +136,7 @@ $(function () {
 
                 // create the tooltip for the current element
                 $( this ).qtip( {
-                    content     : "File ID: " + file_id + "<br>" + get + "<br>" + message,
+                    content     : "File ID: " + file_id + "<br>" + xff + "<br>" + get + "<br>" + message,
                     position    : {
                         target  : 'mouse'
                     },
@@ -159,9 +159,10 @@ $timeto = $_SESSION['timeto'];
 <form method='POST' action="<?php echo "http://" . $_SERVER['SERVER_NAME'] . "/stats/table";?>">
 	<table width='100%' align='center'>
 		<tr>
-			<td>Time From: <input type='text' name='timefrom' id='timefrom' value='<?php echo $timefrom; ?>' maxlength="25" size="20"></td>
-			<td>Time To: <input type='text' name='timeto' id='timeto' value='<?php echo $timeto; ?>' maxlength="25" size="20"></td>
+			<td>Time From: <input type='text' name='timefrom' id='timefrom' value='<?php echo $timefrom; ?>' maxlength="25" size="15"></td>
+			<td>Time To: <input type='text' name='timeto' id='timeto' value='<?php echo $timeto; ?>' maxlength="25" size="15"></td>
 			<td>URI: <input type='text' name='uri' id='uri' value='' maxlength="255" size="15"></td>
+			<td>IP: <input type='text' name='xff' id='xff' value='' maxlength="15" size="15"></td>
 			<td>Site: 
 				<select name='site' id='site'>
 <?php
@@ -186,9 +187,9 @@ foreach ($sites as $s) {
 
                 <table class='table-style01'>
                     <tr>
-                        <th width='20%'>Time</th>
+                        <th>Time</th>
                         <th >Site</th>
-                        <th>URL</th>
+                        <th width='70%'>URL</th>
                     </tr>
 <?php
 foreach ($getattacksdetail as $attacks) {
