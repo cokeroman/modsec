@@ -62,7 +62,7 @@ foreach ($gettopip as $line) {
         echo "{";
         echo "name: \"$xff\"" . ",";
         echo "y: $line[ataques]" . ",";
-        echo "sliced: true";
+        echo "sliced: false";
         echo "},";
 }
 ?>

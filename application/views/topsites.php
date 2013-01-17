@@ -62,7 +62,7 @@ foreach ($gettopsites as $line) {
 	echo "{";
 	echo "name: \"$site\"" . ",";	
 	echo "y: $line[ataques]" . ",";
-	echo "sliced: true";
+	echo "sliced: false";
 	echo "},";
 }
 ?>
