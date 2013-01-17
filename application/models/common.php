@@ -35,7 +35,7 @@ Class Common extends CI_Model
 	{
                 $this->load->database();
 
-                $sql = "select count(id) as ataques, xff from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by xff order by ataques desc limit 0,20;";
+                $sql = "select count(id) as ataques, xff from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by xff order by ataques desc limit 0,10;";
 
                 if ($query = $this->db->query($sql)) {
                         return $query->result_array();
@@ -48,7 +48,7 @@ Class Common extends CI_Model
         {
                 $this->load->database();
 
-                $sql = "select count(id) as ataques, host ,get from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by get order by ataques desc limit 0,20;";
+                $sql = "select count(id) as ataques, host ,get from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by get order by ataques desc limit 0,10;";
 
                 if ($query = $this->db->query($sql)) {
                         return $query->result_array();
@@ -114,7 +114,7 @@ Class Common extends CI_Model
         {
                 $this->load->database();
 
-                $sql = "select count(id) as ataques, host from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by host order by ataques desc limit 0,20;";
+                $sql = "select count(id) as ataques, host from log WHERE  FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL 1 HOUR) group by host order by ataques desc limit 0,10;";
 
                 if ($query = $this->db->query($sql)) {
                         return $query->result_array();
