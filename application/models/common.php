@@ -216,6 +216,33 @@ Class Common extends CI_Model
 
 	}
 
+        function getattackspertime($tstimefrom, $tstimeto)
+        {
+                $this->load->database();
+                $tstimefrom = $this->db->escape_str($tstimefrom); // Numero de segundos que queremos consultar hacia atras
+                $tstimeto = $this->db->escape_str($tstimeto);
+
+
+
+                $sql = "SELECT
+                        COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto
+                        FROM log      
+                        WHERE timestamp >= $tstimefrom AND timestamp <= $tstimeto 
+                        GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') 
+                        ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
+
+
+                if ($query = $this->db->query($sql)) {
+                        return $query->result_array();
+                } else {
+                        return FALSE;
+                }
+
+        }
+
+
+
+
 	// Devuelve un array con todos los datos de un periodo dado para pintar la grafica de ataques por site
 	function getattackspertimepersite($horas, $site, $sites) 
 	{

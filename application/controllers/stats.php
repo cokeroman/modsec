@@ -107,6 +107,9 @@ class Stats extends CI_Controller {
 
 				
 			$data['getattacksdetail'] = $this->common->getattacksdetail($tstimefrom, $tstimeto, $site, $data['sites'], $uri);
+			
+			// Los datos para pintar el grafico
+			$data['array_ataques'] = $this->common->getattackspertime($tstimefrom, $tstimeto);
 
 			$this->load->view('header');
 			$this->load->view('menu');

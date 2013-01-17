@@ -1,6 +1,5 @@
 <html>
 	<head>
-		    <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
 		    <script src="/js/highcharts.js" type="text/javascript"></script>
                     <script src="/js/highcharts-more.js" type="text/javascript"></script>
 <script>

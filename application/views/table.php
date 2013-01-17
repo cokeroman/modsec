@@ -1,6 +1,109 @@
 <html>
 <head>
         <script type="text/javascript" src="/js/jquery.qtip-1.0.0-rc3.min.js"></script>
+        <script src="/js/highcharts.js" type="text/javascript"></script>
+        <script src="/js/highcharts-more.js" type="text/javascript"></script>
+
+
+	<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container-graph',
+                type: 'spline',
+                height: 300,
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Attacks',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                type: 'datetime',
+                labels: {
+                        rotation: 0,
+                        enabled: false
+                }
+            },
+            plotOptions: {
+                series: {
+                        marker: {
+                                enabled: false
+                        },
+                        cursor: 'pointer',
+                        point: {
+                        events: {
+                                click: function() {
+                                location.href = this.options.url;
+                                }
+                        }
+                        }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Attacks/min'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.point.name +': '+ this.y +' Attacks';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            colors: [
+                '<?php echo sprintf('#%06X', mt_rand(0, 0xFFFFFF));?>'
+            ],
+            series: [{
+                name: 'ataques',
+                data: [ 
+                <?php
+                {
+                        foreach ($array_ataques as $dato) {
+				$tstimefrom = strtotime($dato['minuto']);
+                                $tstimeto = strtotime($dato['minuto']) + 60;
+                                echo "{";
+				echo "name: \"$dato[minuto]\"" . ",";
+                                echo "y: $dato[ataque]" . ",";
+				echo "url: \"http://" . $_SERVER['SERVER_NAME'] . "/stats/table/$tstimefrom/$tstimeto \"";
+                                echo "}" . ",";
+                        }
+
+                }
+                ?>
+                ]
+            }]
+        });
+    });
+
+
+});
+
+
+
+	</script>
+
+
 
 
         <script type="text/javascript">
@@ -79,6 +182,7 @@ foreach ($sites as $s) {
 
 </form>
 
+<div id="container-graph"></div>
 
                 <table class='table-style01'>
                     <tr>
