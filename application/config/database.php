@@ -48,9 +48,9 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'vipdbsistemas';
+$db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'modsec';
-$db['default']['password'] = 'm0ds3c.-';
+$db['default']['password'] = 'xxxxxxxxxx';
 $db['default']['database'] = 'mod_sec';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
