@@ -111,8 +111,8 @@ function requestData() {
 		var mm = dd.getMinutes();
 		var ss = dd.getSeconds();
 		var ts = dd.getTime()/1000;
-		var tstimefrom = ts - 120;
-		var tstimeto = ts - 60;
+		var tstimefrom = ts - 180;
+		var tstimeto = ts - 120;
 
 		chart.series[0].addPoint({name: YY + "/" + MM + "/" + DD + " " + hh + ":" + mm, y: parseInt(inc), url: "http://<?php echo $_SERVER['SERVER_NAME']?>/stats/table/" + tstimefrom + "/" + tstimeto + "/<?php echo $site;?>"},true, true);
         })
