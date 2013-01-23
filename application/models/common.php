@@ -129,8 +129,8 @@ Class Common extends CI_Model
 
 		# Calculamos el timestamp hace 2min y hace 1min y lo utilizamos para hacer la query
 		# Le sumamos 3600 para hacer GMT +1 
-		$time2minago = time() - 120; // 3600 - 120
-                $time1minago = time() - 60; // 3600 - 60
+		$time2minago = time() - 180; // 3600 - 120
+                $time1minago = time() - 120; // 3600 - 60
 
 		$sql = "SELECT * from log where timestamp > $time2minago and timestamp < $time1minago";	
 
@@ -152,8 +152,8 @@ Class Common extends CI_Model
 
                 # Calculamos el timestamp hace 2min y hace 1min y lo utilizamos para hacer la query
                 # Le sumamos 3600 para hacer GMT +1 
-                $time2minago = time() - 120; // 3600 - 120
-                $time1minago = time(); // 3600 - 60
+                $time2minago = time() - 180; // 3600 - 120
+                $time1minago = time() - 120;// 3600 - 60
 
 
 		if ($site != 'otros') {
