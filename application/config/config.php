@@ -10,7 +10,7 @@
 |
 |
 */
-$config['sites'] = array("servotic");
+$config['sites'] = array("telecinco", "cuatro", "mitele", "divinity", "otros");
 
 /*
 |--------------------------------------------------------------------------
