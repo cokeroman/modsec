@@ -85,7 +85,7 @@ $(function () {
                                 echo "{";
 				echo "name: \"$dato[minuto]\"" . ",";
                                 echo "y: $dato[ataque]" . ",";
-				echo "url: \"http://" . $_SERVER['SERVER_NAME'] . "/stats/table/$tstimefrom/$tstimeto \"";
+				echo "url: \"http://" . $_SERVER['SERVER_NAME'] . "/stats/table/$tstimefrom/$tstimeto/$_SESSION[site] \"";
                                 echo "}" . ",";
                         }
 
