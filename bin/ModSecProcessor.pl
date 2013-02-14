@@ -20,7 +20,7 @@
 #	  `xff` varchar(45) DEFAULT NULL,
 #	  `ae` varchar(45) DEFAULT NULL,
 #	  `message` text,
-#	  `timestamp` varchar(20) DEFAULT NULL,
+#	  `timestamp` int(15) DEFAULT NULL,
 #	  PRIMARY KEY (`id`),
 #	  UNIQUE KEY `file_id_UNIQUE` (`file_id`),
 #	  KEY `timestamp` (`timestamp`),
