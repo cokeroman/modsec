@@ -12,7 +12,6 @@ class Stats extends CI_Controller {
 
 
 	public function reports($site) {
-
 		if (! isset($site)) {
 			$site = 'all';
 		}
