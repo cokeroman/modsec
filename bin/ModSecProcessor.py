@@ -102,7 +102,7 @@ def ProcessFiles(hilo, fichero):
         
         
         
-        m = re.search('(GET.*)HTTP', line)
+        m = re.search('([GET|POST].*)HTTP', line)
         if m:
             get = m.group(1)
 
