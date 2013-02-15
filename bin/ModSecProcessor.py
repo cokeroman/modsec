@@ -87,9 +87,19 @@ def ProcessFiles(hilo, fichero):
     l = re.sub('\'','', file_content)
     lines = []
     lines = l.split('\\n')
+    get = ""
+    host = ""
+    date = ""
+    cookie = ""
+    referer = ""
+    ua = ""
+    ae = ""
+    xff = ""
+    message = ""
     
     for line in lines:
         line = re.sub('^,','', line)
+        
         
         
         m = re.search('(GET.*)HTTP', line)
@@ -129,11 +139,12 @@ def ProcessFiles(hilo, fichero):
             message = m.group(1)
        
     
+     
     
     query = "INSERT INTO log (file_id, host, get, date, cookie, referer, ua, xff, ae, message, timestamp) VALUES (\'" + mdb.escape_string(file_name) + "\', \'" + mdb.escape_string(host) + "\', \'" + mdb.escape_string(get) + "\', \'" + mdb.escape_string(date) + "\', \'" + mdb.escape_string(cookie) + "\', \'" + mdb.escape_string(referer) + "\', \'" + mdb.escape_string(ua) + "\', \'" + mdb.escape_string(xff) + "\', \'" + mdb.escape_string(ae) + "\', \'" + mdb.escape_string(message) + "\', \'" + str(ts) + "\');"
 
     InsertDB(query)
-    print "\t\t\t[-] Borrando: " + fichero
+    #print "\t\t\t[-] Borrando: " + fichero
     os.remove(fichero)
     
 def main():
