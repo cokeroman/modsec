@@ -9,10 +9,10 @@ import time
 import re
 import MySQLdb as mdb
 
-dbhost = 'vipdbsistemas'
+dbhost = 'localhost'
 dbname = 'mod_sec'
 dbuser = 'modsec'
-dbpass = 'm0ds3c.-'
+dbpass = 'xxxxxx'
 
 screenLock = Semaphore(value=1)
 
