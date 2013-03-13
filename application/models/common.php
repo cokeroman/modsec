@@ -321,8 +321,8 @@ Class Common extends CI_Model
 			$sql = "SELECT
                                COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto
                         FROM log      
-                        WHERE                                 host like '%$site%' AND FROM_UNIXTIME(TIMESTAMP) <= NOW() AND FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL $horas HOUR) 
-                        GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') 
+                        WHERE                                 host like '%$site%' AND TIMESTAMP <= UNIX_TIMESTAMP(NOW()) AND TIMESTAMP >= UNIX_TIMESTAMP(NOW() - INTERVAL $horas HOUR) 
+                        GROUP BY minuto 
                         ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
 		} else {
 			$sql = "SELECT COUNT(id) AS ataque, DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y/%m/%d %H:%i') AS minuto FROM log WHERE";
@@ -330,7 +330,7 @@ Class Common extends CI_Model
 				if ($s == 'otros') {continue;}
 				$sql .= " host not like '%$s%' AND";
 			}
-			$sql .= " FROM_UNIXTIME(TIMESTAMP) <= NOW() AND FROM_UNIXTIME(TIMESTAMP) >= (NOW() - INTERVAL $horas HOUR) GROUP BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
+			$sql .= " TIMESTAMP <= UNIX_TIMESTAMP(NOW()) AND TIMESTAMP >= UNIX_TIMESTAMP(NOW() - INTERVAL $horas HOUR) GROUP BY minuto ORDER BY DATE_FORMAT(FROM_UNIXTIME(TIMESTAMP), '%Y-%m-%d %H:%i') ASC;";
 		}
 
 
