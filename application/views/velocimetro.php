@@ -58,7 +58,7 @@ $(function () {
 	    // the value axis
 	    yAxis: {
 	        min: 0,
-	        max: 100,
+	        max: 500,
 	        
 	        minorTickInterval: 'auto',
 	        minorTickWidth: 1,
@@ -80,15 +80,15 @@ $(function () {
 	        },
 	        plotBands: [{
 	            from: 0,
-	            to: 30,
+	            to: 100,
 	            color: '#55BF3B' // green
 	        }, {
-	            from: 30,
-	            to: 70,
+	            from: 100,
+	            to: 250,
 	            color: '#DDDF0D' // yellow
 	        }, {
-	            from: 70,
-	            to: 100,
+	            from: 250,
+	            to: 500,
 	            color: '#DF5353' // red
 	        }]        
 	    },
